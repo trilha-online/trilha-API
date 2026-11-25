@@ -1,0 +1,19 @@
+# Banco local de desenvolvimento. Só roda na máquina de quem desenvolve:
+# teste online e produção usam bancos próprios, configurados por variável de ambiente.
+# A senha abaixo não é segredo — este banco não existe fora do seu computador.
+services:
+  postgres:
+    image: postgres:17
+    container_name: trilha-postgres
+    environment:
+      POSTGRES_DB: trilha
+      POSTGRES_USER: trilha
+      POSTGRES_PASSWORD: trilha_local
+    ports:
+      # 5440, e não 5432/5433: essas costumam estar ocupadas por um Postgres instalado no Windows.
+      - "5440:5432"
+    volumes:
+      - trilha-dados:/var/lib/postgresql/data
+
+volumes:
+  trilha-dados:
